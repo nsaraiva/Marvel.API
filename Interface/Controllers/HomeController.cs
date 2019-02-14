@@ -11,6 +11,7 @@ using System.Net.Http.Headers;
 using Microsoft.Extensions.Configuration;
 using System.Security.Cryptography;
 using Newtonsoft.Json;
+using System.Collections;
 
 namespace Interface.Controllers
 {
@@ -38,14 +39,16 @@ namespace Interface.Controllers
 
                 HttpResponseMessage response = client.GetAsync(
                 config.GetSection("MarvelComicsAPI:BaseURL").Value +
-                $"characters?ts={ts}&apikey={publicKey}&hash={hash}").Result;
+                $"characters?limit=100&ts={ts}&apikey={publicKey}&hash={hash}").Result;
 
                 response.EnsureSuccessStatusCode();
                 string conteudo = response.Content.ReadAsStringAsync().Result;
 
                 dynamic resultado = JsonConvert.DeserializeObject(conteudo);
 
-                foreach(var item in resultado.data.results)
+                foreach(var item in ((IEnumerable)resultado.data.results)
+                    .Cast<dynamic>()
+                    .Where(d => d.description != ""))
                 {
                     personagens.Add(new Personagem
                     {
