@@ -1,0 +1,57 @@
+﻿
+@using System.Linq;
+
+@model IEnumerable<Personagem>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2 text-center">
+            <p>
+                <span class="glyphicon glyphicon-flash " style="color:blue"></span>
+                <span style="color:white">Time Azul</span>
+            </p>
+        </div>
+        <div class="col-sm-8 text-center"></div>
+        <div class="col-sm-2 text-center">
+            <p>
+                <span class="glyphicon glyphicon-fire" style="color:red"></span>
+                <span style="color:white">Time Vermelho</span>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @foreach (var item in Model.Where(p => p.Time == 1))
+            {
+                <div class="column">
+                    <img class="clickable" src="@item.Imagem" height="80" width="70" data-toggle="tooltip" title="@item.Nome" />
+                </div>
+            }
+        </div>
+        <div id="selected-t1"class="col-sm-2">
+            <div class="row" style="height:80px"></div>
+            <div id="t1-1" class="row" style="height:80px"></div>
+            <div id="t1-2" class="row" style="height:80px"></div>
+            <div id="t1-3" class="row" style="height:80px"></div>
+            <div class="row" style="height:80px"></div>
+        </div>
+        <div class="col-sm-4">
+
+        </div>
+        <div class="col-sm-2">
+
+        </div>
+        <div class="col-sm-2">
+            @foreach (var item in Model.Where(p => p.Time == 2))
+            {
+                <div class="column">
+                    <img src="@item.Imagem" height="80" width="70" data-toggle="tooltip" title="@item.Nome" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
