@@ -8,6 +8,7 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/ImgHoverEffect.css" />
         <style>
             .column {
                 width: 50%;
@@ -57,19 +58,19 @@
             $(document).ready(function () {
                 $('[data-toggle="tooltip"]').tooltip();
             });
+
             $('.clickable').click(function () {
-                var divs = $('#selected-t1').children('div');
-                //alert(divs.length);
-                for (var i = 1; i < 5; i++)
-                {
-                    if (!$('#selected-t1 div[i]:has(img)').length)
-                    {
-                        alert("ok");
-                        $(this).clone().appendTo('#selected - t1 div[i]');
+                var personagens = new Array(6); 
+                var time = $(this).attr("id");
+                var divs = $('#selected-' + time).children('div');
+
+                for (var i = 1; i < 4; i++) {
+                    if ($("#" + time + "-" + i + ":has('img')").length == 0) {
+                        $(this).clone().appendTo(divs[i]);
+                        peronagem.push($(divs[i]).children('img').attr("data-id"));
                         break;
                     }
                 }
-               
             });
         </script>
 
